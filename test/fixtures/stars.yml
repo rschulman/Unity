@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  classification: MyString
+  diameter: 1
+  mass: 1
+  orbit: 1
+  system_id: 1
+
+two:
+  name: MyString
+  classification: MyString
+  diameter: 1
+  mass: 1
+  orbit: 1
+  system_id: 1

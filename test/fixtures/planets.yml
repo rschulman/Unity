@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  type: 
+  radius: 1
+  mass: 1
+  mean_temp: 1
+  eccentricity: 1.5
+  smaxis: 1.5
+  inclination: 1.5
+  long_ascend: 1.5
+  arg_peri: 1.5
+  mean_anomoly: 1.5
+  star_id: 1
+
+two:
+  name: MyString
+  type: 
+  radius: 1
+  mass: 1
+  mean_temp: 1
+  eccentricity: 1.5
+  smaxis: 1.5
+  inclination: 1.5
+  long_ascend: 1.5
+  arg_peri: 1.5
+  mean_anomoly: 1.5
+  star_id: 1
