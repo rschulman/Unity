@@ -4,7 +4,7 @@ class CreatePlanets < ActiveRecord::Migration
       t.string :name
       t.string :type
       t.integer :radius
-      t.integer :mass
+      t.bigint :mass
       t.integer :mean_temp
       t.float :gravity
       t.float :smaxis

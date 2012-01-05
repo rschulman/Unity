@@ -4,7 +4,7 @@ class CreateStars < ActiveRecord::Migration
       t.string :name
       t.string :classification
       t.integer :radius
-      t.integer :mass
+      t.bigint :mass
       t.integer :orbit
       t.integer :system_id
 
