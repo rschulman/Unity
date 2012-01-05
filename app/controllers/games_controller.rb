@@ -4,7 +4,7 @@ class GamesController < ApplicationController
     @new_game = Game.new
     @new_game.save
     sol_system = @new_game.systems.create(:name => 'Sol',:discovered => true)
-    sol_star = sol_system.stars.create(:name => 'A',:classification => 'G2V',:radius => 696000,:mass => 1.9891e30,:orbit => 0)
+    sol_star = sol_system.stars.create(:name => 'A',:classification => 'G2V',:radius => 696000,:mass => 1.9891e10,:orbit => 0)
     sol_planets = [
       { :name => "Mercury",
         :type => "Terrestrial",
