@@ -6,13 +6,13 @@
 <script type="text/javascript">
 	var canvas = $('#systemMap');
 	var context = canvas.get(0).getContext('2d');
-	var scalar = 10000000;
+	var scalar = 9000000;
 	var planetX = 0;
 	var planetY = 0;
 	var planetAngle = 0;
 	
 	canvas.attr("width", $(window).get(0).innerWidth);
-	canvas.attr("height",$(window).get(0).innerHeight - 500);
+	canvas.attr("height",$(window).get(0).innerHeight - 100);
 
 	// Background fill.
 	context.fillStyle = "rgb(95,158,160)";
@@ -31,16 +31,16 @@
 	context.stroke();
 	
 	// Draw orbits and planets.
-	<% @new_game.systems.find_by_name("Sol").stars.find_by_name("A").planets.each do |planet| %>
+	<% @our_game.systems.find_by_name("Sol").stars.find_by_name("A").planets.each do |planet| %>
 		context.strokeStyle = "rgb(224,255,255)";
 		context.beginPath();
-		context.arc(canvas.width()/2,canvas.height()/2,<% planet.smaxis %>/scalar,Math.PI*2,false);
+		context.arc(canvas.width()/2,canvas.height()/2,<%= planet.smaxis %>/scalar,Math.PI*2,false);
 		context.closePath();
 		context.stroke();
 		
-		planetAngle = (<% planet.mean_anomoly + planet.arg_peri %>) % (Math.PI * 2);
-		planetX = canvas.width()/2 + ((<% planet.smaxis %>/scalar) * Math.cos(planetAngle));
-		planetY = canvas.height()/2 + ((<% planet.smaxis %>/scalar) * Math.sin(planetAngle));
+		planetAngle = (<%= planet.mean_anomoly + planet.arg_peri %>) % (Math.PI * 2);
+		planetX = canvas.width()/2 + ((<%= planet.smaxis %>/scalar) * Math.cos(planetAngle));
+		planetY = canvas.height()/2 + ((<%= planet.smaxis %>/scalar) * Math.sin(planetAngle));
 		
 		context.beginPath();
 		context.arc(planetX,planetY,5,Math.PI*2,false);

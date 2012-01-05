@@ -1,6 +1,5 @@
 Unity::Application.routes.draw do
-  get "games/new"
-  get "games/show"
+  resources :games
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
