@@ -7,4 +7,5 @@ class ChangeColumnstoBigint < ActiveRecord::Migration
   def down
     change_column :stars, :mass, :integer
     change_column :planets, :mass, :bigint
+  end
 end
