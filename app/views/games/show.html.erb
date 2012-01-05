@@ -1,0 +1,56 @@
+<canvas id="systemMap" width="1000px" height="1000px">
+	This game requires a more modern browser than you are currently using.
+	Please try upgrading to Chrome, Firefox, or Opera.
+</canvas>
+
+<script type="text/javascript">
+	var canvas = $('#systemMap');
+	var context = canvas.get(0).getContext('2d');
+	var scalar = 10000000;
+	var planetX = 0;
+	var planetY = 0;
+	var planetAngle = 0;
+	
+	canvas.attr("width", $(window).get(0).innerWidth);
+	canvas.attr("height",$(window).get(0).innerHeight - 500);
+
+	// Background fill.
+	context.fillStyle = "rgb(95,158,160)";
+	context.fillRect(0,0,canvas.width(),canvas.height());
+	
+	// Draw the center sun.
+	context.beginPath();
+	context.arc(canvas.width()/2,canvas.height()/2,5,Math.PI*2,false);
+	context.closePath();
+	context.fillStyle = "rgb(255,215,0)";
+	context.fill();
+	context.strokeStyle = "rgb(255,255,255)";
+	context.beginPath();
+	context.arc(canvas.width()/2,canvas.height()/2,6,Math.PI*2,false);
+	context.closePath();
+	context.stroke();
+	
+	// Draw orbits and planets.
+	<% @our_game.planets.each do |planet| %>
+		context.strokeStyle = "rgb(224,255,255)";
+		context.beginPath();
+		context.arc(canvas.width()/2,canvas.height()/2,<% planet.smaxis %>/scalar,Math.PI*2,false);
+		context.closePath();
+		context.stroke();
+		
+		planetAngle = (<% planet.mean_anomoly + planet.arg_peri %>) % (Math.PI * 2);
+		planetX = canvas.width()/2 + ((<% planet.smaxis %>/scalar) * Math.cos(planetAngle));
+		planetY = canvas.height()/2 + ((<% planet.smaxis %>/scalar) * Math.sin(planetAngle));
+		
+		context.beginPath();
+		context.arc(planetX,planetY,5,Math.PI*2,false);
+		context.closePath();
+		context.fillStyle = "rgb(205,133,63)";
+		context.fill();
+		context.strokeStyle = "rgb(255,255,255)";
+		context.beginPath();
+		context.arc(planetX,planetY,6,Math.PI*2,false);
+		context.closePath();
+		context.stroke();
+	<% end %>
+</script>

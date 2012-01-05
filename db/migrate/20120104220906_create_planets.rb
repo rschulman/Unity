@@ -6,10 +6,8 @@ class CreatePlanets < ActiveRecord::Migration
       t.integer :radius
       t.integer :mass
       t.integer :mean_temp
-      t.float :eccentricity
+      t.float :gravity
       t.float :smaxis
-      t.float :inclination
-      t.float :long_ascend
       t.float :arg_peri
       t.float :mean_anomoly
       t.integer :star_id
