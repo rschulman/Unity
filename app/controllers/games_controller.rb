@@ -3,7 +3,7 @@ class GamesController < ApplicationController
   def new
     @new_game = Game.new
     @new_game.game_date = DateTime.new(2025,1,1)
-    @new_game.epoch_date = DateTime.jd(2451545)
+    @new_game.epoch_date = DateTime.jd(2451545.5)
     @new_game.save
     sol_system = @new_game.systems.create(:name => 'Sol',:discovered => true)
     sol_star = sol_system.stars.create(:name => 'A',:classification => 'G2V',:radius => 696000,:mass => 1.9891e10,:orbit => 0)
@@ -81,10 +81,19 @@ class GamesController < ApplicationController
         :arg_peri => "4.63641",
         :mean_anomoly => "4.67342"},]
     sol_star.planets.create(sol_planets)
-    render :show
+    redirect_to @new_game
   end
   
   def show
     @our_game = Game.find(params[:id])
   end
+  
+  def edit
+    @our_game = Game.find(params[:id])
+    temp_date = @our_game.game_date.advance(params[:unit].to_sym => params[:increment].to_i)
+    @our_game.game_date = temp_date
+    @our_game.save
+    redirect_to @our_game
+  end
+  
 end
