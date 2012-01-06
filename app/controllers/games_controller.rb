@@ -2,6 +2,8 @@ class GamesController < ApplicationController
   
   def new
     @new_game = Game.new
+    @new_game.game_date = DateTime.new(2025,1,1)
+    @new_game.epoch_date = DateTime.jd(2451545)
     @new_game.save
     sol_system = @new_game.systems.create(:name => 'Sol',:discovered => true)
     sol_star = sol_system.stars.create(:name => 'A',:classification => 'G2V',:radius => 696000,:mass => 1.9891e10,:orbit => 0)
