@@ -1,68 +1,18 @@
+<% content_for :head do %>
+	<%= javascript_tag "var current_sys = #{@our_game.systems.find_by_name("Sol").id};"%>
+	<%= javascript_include_tag "show" %>
+<% end %>
+
 <% require 'date' %>
+<div id="temp"></div>
 <p><%= @our_game.game_date.strftime("%B %d, %Y %H:%M:%S") %></p>
 <p>Advance date: 
-<%= link_to "2 weeks", edit_game_path(@our_game, :unit => "weeks", :increment => 2), :method => "post" %>
-<%= link_to "1 month", edit_game_path(@our_game, :unit => "months", :increment => 1), :method => "post" %> 
-<%= link_to "6 months", edit_game_path(@our_game, :unit => "months", :increment => 6), :method => "post" %>
+<%= link_to "2 weeks", game_path(@our_game, :unit => "weeks", :increment => 2), :method => "put" %>
+<%= link_to "1 month", game_path(@our_game, :unit => "months", :increment => 1), :method => "put" %> 
+<%= link_to "6 months", game_path(@our_game, :unit => "months", :increment => 6), :method => "put" %>
 
 <div id="map"><canvas id="systemMap" width="1000px" height="1000px">
 	This game requires a more modern browser than you are currently using.
 	Please try upgrading to Chrome, Firefox, or Opera.
 </canvas>
 </div>
-<script type="text/javascript">
-	var canvas = $('#systemMap');
-	var context = canvas.get(0).getContext('2d');
-	var scalar = 9000000;
-	var planetX = 0;
-	var planetY = 0;
-	var planetAngle = 0;
-	var planetName = "";
-	
-	canvas.attr("width", $(window).get(0).innerWidth);
-	canvas.attr("height",$(window).get(0).innerHeight - 100);
-
-	// Background fill.
-	context.fillStyle = "rgb(95,158,160)";
-	context.fillRect(0,0,canvas.width(),canvas.height());
-	context.font = "15px serif"
-	
-	// Draw the center sun.
-	context.beginPath();
-	context.arc(canvas.width()/2,canvas.height()/2,5,Math.PI*2,false);
-	context.closePath();
-	context.fillStyle = "rgb(255,215,0)";
-	context.fill();
-	context.strokeStyle = "rgb(255,255,255)";
-	context.beginPath();
-	context.arc(canvas.width()/2,canvas.height()/2,6,Math.PI*2,false);
-	context.closePath();
-	context.stroke();
-	
-	// Draw orbits and planets.
-	<% this_star = @our_game.systems.find_by_name("Sol").stars.find_by_name("A") %>
-	<% this_star.planets.each do |planet| %>
-		context.strokeStyle = "rgb(224,255,255)";
-		context.beginPath();
-		context.arc(canvas.width()/2,canvas.height()/2,<%= planet.smaxis %>/scalar,Math.PI*2,false);
-		context.closePath();
-		context.stroke();
-		
-		planetAngle = <%= planet.mean_anomoly + ((@our_game.game_date - @our_game.epoch_date).to_i * Math.sqrt((6.673e-11*(planet.mass + (this_star.mass * 1e20)))/ ((planet.smaxis * 1000) ** 3))) + planet.arg_peri %> % (Math.PI * 2);
-		planetX = canvas.width()/2 + ((<%= planet.smaxis %>/scalar) * Math.cos(planetAngle));
-		planetY = canvas.height()/2 + ((<%= planet.smaxis %>/scalar) * Math.sin(planetAngle));
-		
-		context.beginPath();
-		context.arc(planetX,planetY,5,Math.PI*2,false);
-		context.closePath();
-		context.fillStyle = "rgb(205,133,63)";
-		context.fill();
-		context.strokeStyle = "rgb(255,255,255)";
-		context.beginPath();
-		context.arc(planetX,planetY,6,Math.PI*2,false);
-		context.closePath();
-		context.stroke();
-		context.fillStyle = "rgb(255,255,255)";
-		context.fillText("<%= planet.name %>", planetX + 10, planetY);
-	<% end %>
-</script>

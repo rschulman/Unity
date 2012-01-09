@@ -1,5 +1,7 @@
 class GamesController < ApplicationController
   
+  respond_to :html, :xml, :js
+  
   def new
     @new_game = Game.new
     @new_game.game_date = DateTime.new(2025,1,1)
@@ -86,9 +88,14 @@ class GamesController < ApplicationController
   
   def show
     @our_game = Game.find(params[:id])
+    
+    respond_with do |format|
+      format.html
+      format.js
+    end
   end
   
-  def edit
+  def update
     @our_game = Game.find(params[:id])
     temp_date = @our_game.game_date.advance(params[:unit].to_sym => params[:increment].to_i)
     @our_game.game_date = temp_date
