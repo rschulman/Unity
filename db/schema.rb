@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120106023932) do
+ActiveRecord::Schema.define(:version => 20120110180822) do
 
   create_table "games", :force => true do |t|
     t.datetime "game_date"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(:version => 20120106023932) do
     t.string   "name"
     t.string   "type"
     t.integer  "radius"
-    t.integer  "mass"
+    t.float    "mass"
     t.integer  "mean_temp"
     t.float    "gravity"
     t.float    "smaxis"
