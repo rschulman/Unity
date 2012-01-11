@@ -45,6 +45,9 @@ function DrawSystem(system_data, context, canvas, scalar){
 	var epoch_diff = parseFloat($(system_data).find("epoch_diff").text());
 	
 	console.log(system_data);
+	console.log(epoch_diff);
+	
+
 
 	// Set font size.
 	context.font = "15px serif"
@@ -62,13 +65,14 @@ function DrawSystem(system_data, context, canvas, scalar){
 		context.closePath();
 		context.stroke();
 		
-		var starmass = parseFloat($(this).find("mass").text());
+		var starmass = parseFloat($(this).find("starmass").text());
 		
 		$(this).find("planet").each(function() {
 			var mean = parseFloat($(this).find("mean_anomoly").text());
 			var mass = parseFloat($(this).find("mass").text());
 			var smaxis = parseFloat($(this).find("smaxis").text());
 			var arg_peri = parseFloat($(this).find("arg_peri").text());
+			console.log(mass);
 			
 			context.strokeStyle = "rgb(224,255,255)";
 			context.beginPath();
@@ -76,8 +80,9 @@ function DrawSystem(system_data, context, canvas, scalar){
 			context.closePath();
 			context.stroke();
 
-			planetAngle = (mean + arg_peri + (epoch_diff * Math.sqrt((6.673e-11*(mass + (starmass * Math.pow(10, 20))))/Math.pow((smaxis * 1000), 3)))) % (Math.PI * 2);
-			console.log(planetAngle);
+			planetAngle = (mean + arg_peri + (epoch_diff * Math.sqrt((6.673e-11 * (mass + (starmass * 1e+20)))/Math.pow((smaxis * 1000), 3)))) % (Math.PI * 2);
+			//planetAngle = <%= planet.mean_anomoly + ((@our_game.game_date - @our_game.epoch_date).to_i * Math.sqrt((6.673e-11*(planet.mass + (this_star.mass * 1e20)))/ ((planet.smaxis * 1000) ** 3))) + planet.arg_peri %> % (Math.PI * 2);
+			//console.log(planetAngle);
 			planetX = canvas.width()/2 + ((smaxis/scalar) * Math.cos(planetAngle));
 			planetY = canvas.height()/2 + ((smaxis/scalar) * Math.sin(planetAngle));
 			

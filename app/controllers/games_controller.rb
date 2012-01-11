@@ -18,7 +18,7 @@ class GamesController < ApplicationController
         :gravity => ".38",
         :smaxis => "57909100",
         :arg_peri => ".508309",
-        :mean_anomoly => "174.796" },
+        :mean_anomoly => "3.05076" },
       { :name => "Venus",
         :type => "Terrestrial",
         :radius => "6051",

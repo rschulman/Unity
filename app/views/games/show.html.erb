@@ -7,6 +7,7 @@
 <div id="temp"></div>
 <p><%= @our_game.game_date.strftime("%B %d, %Y %H:%M:%S") %></p>
 <p>Advance date: 
+<%= link_to "1 day", game_path(@our_game, :unit => "days", :increment => 1), :method => "put" %>
 <%= link_to "2 weeks", game_path(@our_game, :unit => "weeks", :increment => 2), :method => "put" %>
 <%= link_to "1 month", game_path(@our_game, :unit => "months", :increment => 1), :method => "put" %> 
 <%= link_to "6 months", game_path(@our_game, :unit => "months", :increment => 6), :method => "put" %>

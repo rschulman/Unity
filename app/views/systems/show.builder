@@ -4,7 +4,7 @@ xml.system do
   @our_system.stars.each do |star|
     xml.star do
       xml.name star.name
-      xml.mass star.mass
+      xml.starmass star.mass
       xml.smaxis star.orbit
       star.planets.each do |planet|
         xml.planet do
