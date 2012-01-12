@@ -43,11 +43,6 @@ function DrawSystem(system_data, context, canvas, scalar){
 	var planetY = 0;
 	var planetAngle = 0;
 	var epoch_diff = parseFloat($(system_data).find("epoch_diff").text());
-	
-	console.log(system_data);
-	console.log(epoch_diff);
-	
-
 
 	// Set font size.
 	context.font = "15px serif"
@@ -81,8 +76,6 @@ function DrawSystem(system_data, context, canvas, scalar){
 			context.stroke();
 
 			planetAngle = (mean + arg_peri + (epoch_diff * Math.sqrt((6.673e-11 * (mass + (starmass * 1e+20)))/Math.pow((smaxis * 1000), 3)))) % (Math.PI * 2);
-			//planetAngle = <%= planet.mean_anomoly + ((@our_game.game_date - @our_game.epoch_date).to_i * Math.sqrt((6.673e-11*(planet.mass + (this_star.mass * 1e20)))/ ((planet.smaxis * 1000) ** 3))) + planet.arg_peri %> % (Math.PI * 2);
-			//console.log(planetAngle);
 			planetX = canvas.width()/2 + ((smaxis/scalar) * Math.cos(planetAngle));
 			planetY = canvas.height()/2 + ((smaxis/scalar) * Math.sin(planetAngle));
 			

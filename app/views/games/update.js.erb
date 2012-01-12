@@ -1,0 +1,15 @@
+$('#date').html("<%= escape_javascript(@our_game.game_date.strftime("%B %d, %Y %H:%M:%S")) %>");
+var system = GetSystem( <%= @our_game.systems.find_by_name("Sol").id %> );
+var canvas = $('#systemMap');
+var context = canvas.get(0).getContext('2d');
+var scalar = 9000000;
+
+context.clearRect(0, 0, canvas.width(), canvas.height());
+	
+system.done(function(system_data, status, xhr) {
+	
+	DrawSystem(system_data, context, canvas, scalar);
+});
+system.fail(function(data_return, status, error){
+	alert("Failed! " + error + " " + status);
+});

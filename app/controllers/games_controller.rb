@@ -88,11 +88,6 @@ class GamesController < ApplicationController
   
   def show
     @our_game = Game.find(params[:id])
-    
-    respond_with do |format|
-      format.html
-      format.js
-    end
   end
   
   def update
@@ -100,7 +95,9 @@ class GamesController < ApplicationController
     temp_date = @our_game.game_date.advance(params[:unit].to_sym => params[:increment].to_i)
     @our_game.game_date = temp_date
     @our_game.save
-    redirect_to @our_game
+    respond_with(@our_game) do |format|
+      format.js
+    end
   end
   
 end

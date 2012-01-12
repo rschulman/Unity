@@ -4,13 +4,14 @@
 <% end %>
 
 <% require 'date' %>
-<div id="temp"></div>
+<div id="date">
 <p><%= @our_game.game_date.strftime("%B %d, %Y %H:%M:%S") %></p>
+</div>
 <p>Advance date: 
-<%= link_to "1 day", game_path(@our_game, :unit => "days", :increment => 1), :method => "put" %>
-<%= link_to "2 weeks", game_path(@our_game, :unit => "weeks", :increment => 2), :method => "put" %>
-<%= link_to "1 month", game_path(@our_game, :unit => "months", :increment => 1), :method => "put" %> 
-<%= link_to "6 months", game_path(@our_game, :unit => "months", :increment => 6), :method => "put" %>
+<%= link_to "1 day", game_path(@our_game, :unit => "days", :increment => 1), :remote => true, :method => "put" %>
+<%= link_to "2 weeks", game_path(@our_game, :unit => "weeks", :increment => 2), :remote => true, :method => "put" %>
+<%= link_to "1 month", game_path(@our_game, :unit => "months", :increment => 1), :remote => true, :method => "put" %> 
+<%= link_to "6 months", game_path(@our_game, :unit => "months", :increment => 6), :remote => true, :method => "put" %>
 
 <div id="map"><canvas id="systemMap" width="1000px" height="1000px">
 	This game requires a more modern browser than you are currently using.
