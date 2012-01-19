@@ -4,7 +4,7 @@ $(document).ready(function() {
 	var scalar = 9000000;
 	
 	canvas.attr("width", $(window).get(0).innerWidth);
-	canvas.attr("height",$(window).get(0).innerHeight - 100);
+	canvas.attr("height",$(window).get(0).innerHeight);
 	
 	var system = GetSystem( current_sys );
 	

@@ -4,15 +4,26 @@
 <% end %>
 
 <% require 'date' %>
-<div id="date">
-<p><%= @our_game.game_date.strftime("%B %d, %Y %H:%M:%S") %></p>
-</div>
-<p>Advance date: 
-<%= link_to "1 day", game_path(@our_game, :unit => "days", :increment => 1), :remote => true, :method => "put" %>
-<%= link_to "2 weeks", game_path(@our_game, :unit => "weeks", :increment => 2), :remote => true, :method => "put" %>
-<%= link_to "1 month", game_path(@our_game, :unit => "months", :increment => 1), :remote => true, :method => "put" %> 
-<%= link_to "6 months", game_path(@our_game, :unit => "months", :increment => 6), :remote => true, :method => "put" %>
 
+<div class="time_management">
+<span id="date" style="font-size: 14pt">
+<p><%= @our_game.game_date.strftime("%B %d, %Y %H:%M:%S") %></p>
+</span>
+<p>Advance date:</p>
+<p>
+	<%= link_to "5 seconds", game_path(@our_game, :unit => "seconds", :increment => 5), :remote => true, :method => "put", :class => "small button gray" %>
+	<%= link_to "1 minute", game_path(@our_game, :unit => "minutes", :increment => 1), :remote => true, :method => "put", :class => "small button gray" %>
+	<%= link_to "1 hour", game_path(@our_game, :unit => "hours", :increment => 1), :remote => true, :method => "put", :class => "small button gray" %>
+	<%= link_to "1 day", game_path(@our_game, :unit => "days", :increment => 1), :remote => true, :method => "put", :class => "small button gray" %>
+</p>
+
+<p>
+	<%= link_to "1 week", game_path(@our_game, :unit => "weeks", :increment => 1), :remote => true, :method => "put", :class => "small button gray" %>
+	<%= link_to "2 weeks", game_path(@our_game, :unit => "weeks", :increment => 2), :remote => true, :method => "put", :class => "small button gray" %>
+	<%= link_to "1 month", game_path(@our_game, :unit => "months", :increment => 1), :remote => true, :method => "put", :class => "small button gray" %> 
+	<%= link_to "6 months", game_path(@our_game, :unit => "months", :increment => 6), :remote => true, :method => "put", :class => "small button gray" %>
+</p>
+</div>
 <div id="map"><canvas id="systemMap" width="1000px" height="1000px">
 	This game requires a more modern browser than you are currently using.
 	Please try upgrading to Chrome, Firefox, or Opera.
